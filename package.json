@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "svgo": "svgo -f src/icons/svg"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-component": "^1.1.1",
+    "css-loader": "^5.2.0",
+    "echarts": "^5.0.2",
+    "element-ui": "^2.15.1",
+    "html-webpack-plugin": "^5.3.1",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^11.0.1",
+    "svg-sprite-loader": "^6.0.7",
+    "svgo": "^2.3.0",
+    "url-loader": "^4.1.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.6",
+    "vue-router": "^3.5.1",
+    "vue-template-compiler": "^2.6.12",
+    "vuex": "^3.6.2",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
