@@ -1,5 +1,5 @@
 <template>
-  <svg class="svg-icon">
+  <svg :class="size" class="svg-icon">
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -11,6 +11,13 @@ export default {
     iconClass: {
       type: String,
       required: true
+    },
+    size: {
+      type: String,
+      default: "small",
+      validator(value) {
+        return ["small", "middle", "large"].includes(value);
+      }
     }
   },
   computed: {
@@ -23,10 +30,18 @@ export default {
 
 <style lang="scss" scoped>
 .svg-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
+  width: 1rem;
+  height: 1rem;
   overflow: hidden;
+}
+
+.middle {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.large {
+  width: 2rem;
+  height: 2rem;
 }
 </style>

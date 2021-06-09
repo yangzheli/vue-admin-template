@@ -4,8 +4,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
+      '@': path.resolve(__dirname, 'src'),
+    },
+    mainFiles: ['index']
   },
   entry: {
     "build": '@/main.js',
@@ -27,7 +28,10 @@ module.exports = {
       }
     }, {
       test: /\.js$/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      options: {
+        presets: ['@vue/babel-preset-jsx'],
+      }
     }, {
       test: /\.css$/,
       use: [
@@ -50,12 +54,12 @@ module.exports = {
         }
       }],
       exclude: [path.resolve('src/icons')]
-    },{
-      test:/\.svg$/,
-      loader:'svg-sprite-loader',
-      include:[path.resolve('src/icons')],
-      options:{
-        symbolId:'icon-[name]'
+    }, {
+      test: /\.svg$/,
+      loader: 'svg-sprite-loader',
+      include: [path.resolve('src/icons')],
+      options: {
+        symbolId: 'icon-[name]'
       }
     }]
   },

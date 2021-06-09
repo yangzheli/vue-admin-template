@@ -1,19 +1,64 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
 import Layout from '@/layout/index.vue'
 
 export const constantRoutes = [{
-  path: '/',
-  component: Layout,
-  children: [{
-    path: 'dashboard',
-    component: () => import('@/views/dashboard/index.vue'),
-    meta: {}
-  }]
-}]
+    path: '/login',
+    component: () => import('@/views/login/index.vue'),
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404/index.vue')
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index.vue'),
+      meta: {}
+    }]
+  },
+  {
+    path: '/form',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: () => import('@/views/form/index.vue'),
+    }]
+  },
+  {
+    path: '/exception',
+    component: Layout,
+    redirect: '/exception/403',
+    children: [{
+      path: '403',
+      component: () => import('@/views/403/index.vue'),
+      meta: {}
+    }, {
+      path: '404',
+      component: () => import('@/views/404/index.vue'),
+      meta: {}
+    }]
+  },
+  {
+    path: '/user',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: () => import('@/views/user/index.vue'),
+    }]
+  },
+  // 404 page must be placed at the end !!!
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
+]
 
 export const asyncRoutes = [{
   path: '/permission',
@@ -30,7 +75,7 @@ export const asyncRoutes = [{
   }]
 }]
 
-const createRouter = () => new Router({
+const createRouter = () => new VueRouter({
   routes: constantRoutes
 })
 

@@ -1,3 +1,3 @@
 <template>
-  <div>dashboard</div>
+  <div class="app-container">dashboard</div>
 </template>

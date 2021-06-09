@@ -1,0 +1,39 @@
+#app {
+  .sidebar-container {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: $sideBarWidth;
+    height: 100%;
+    background: $menuBg;
+    overflow: hidden;
+    transition: width 0.28s;
+
+    a{
+      text-decoration: none;
+    }
+  }
+
+  .main-container {
+    position: relative;
+    min-height: 100%;
+    margin-left: $sideBarWidth;
+    transition: margin-left 0.28s;
+    -webkit-transition: margin-left 0.28s;
+
+    .app-container {
+      padding: 1.5rem;
+    }
+  }
+
+  .hideSidebar {
+    .sidebar-container {
+      width: $hideSideBarWidth;
+    }
+
+    .main-container {
+      margin-left: $hideSideBarWidth;
+    }
+  }
+}
