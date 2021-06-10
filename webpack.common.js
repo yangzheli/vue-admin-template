@@ -3,6 +3,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   resolve: {
+    fallback: {
+      path: require.resolve("path-browserify")
+    },
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },

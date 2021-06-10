@@ -7,10 +7,12 @@ import Layout from '@/layout/index.vue'
 export const constantRoutes = [{
     path: '/login',
     component: () => import('@/views/login/index.vue'),
+    hidden: true
   },
   {
     path: '/404',
-    component: () => import('@/views/404/index.vue')
+    component: () => import('@/views/404/index.vue'),
+    hidden: true
   },
   {
     path: '/',
@@ -19,7 +21,10 @@ export const constantRoutes = [{
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index.vue'),
-      meta: {}
+      meta: {
+        title: 'Dashboard',
+        icon: 'dashboard'
+      }
     }]
   },
   {
@@ -28,20 +33,34 @@ export const constantRoutes = [{
     children: [{
       path: 'index',
       component: () => import('@/views/form/index.vue'),
+      meta: {
+        title: 'Form',
+        icon: 'form'
+      }
     }]
   },
   {
     path: '/exception',
     component: Layout,
     redirect: '/exception/403',
+    meta: {
+      title: 'exception',
+      icon: 'exception'
+    },
     children: [{
       path: '403',
       component: () => import('@/views/403/index.vue'),
-      meta: {}
+      meta: {
+        title: '403',
+        icon: '403'
+      }
     }, {
       path: '404',
       component: () => import('@/views/404/index.vue'),
-      meta: {}
+      meta: {
+        title: '404',
+        icon: '404'
+      }
     }]
   },
   {
@@ -50,6 +69,10 @@ export const constantRoutes = [{
     children: [{
       path: 'index',
       component: () => import('@/views/user/index.vue'),
+      meta: {
+        title: 'user',
+        icon: 'user'
+      }
     }]
   },
   // 404 page must be placed at the end !!!

@@ -3,6 +3,9 @@ $menuHover: #263445;
 $menuText: #bfcbd9;
 $menuActiveText: #409eff;
 
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+
 $sideBarWidth: 12rem;
 $hideSideBarWidth: 3.5rem;
 
@@ -12,6 +15,8 @@ $hideSideBarWidth: 3.5rem;
   menuHover: $menuHover;
   menuText: $menuText;
   menuActiveText: $menuActiveText;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
   sideBarWidth: $sideBarWidth;
   hideSideBarWidth: $hideSideBarWidth;
 }
