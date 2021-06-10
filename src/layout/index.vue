@@ -16,6 +16,7 @@
 import Sidebar from "./components/Sidebar/index.vue";
 import Navbar from "./components/Navbar.vue";
 import AppMain from "./components/AppMain.vue";
+import ResizeMixin from "./mixin/ResizeHandler.js";
 
 export default {
   components: {
@@ -23,6 +24,7 @@ export default {
     Navbar,
     AppMain
   },
+  mixins: [ResizeMixin],
   computed: {
     // ...mapGetters(["permission_routes"])
     classObj() {
@@ -39,6 +41,11 @@ export default {
     device() {
       return this.$store.state.app.device;
     }
+  },
+  methods: {
+    handleClickOutside: function() {
+      this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
+    }
   }
 };
 </script>
@@ -46,7 +53,22 @@ export default {
 <style lang="scss" scoped>
 .app-wrapper {
   position: relative;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  &.mobile.openSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .drawer-bg {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+  }
 }
 </style>

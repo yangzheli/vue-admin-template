@@ -10,7 +10,7 @@
     overflow: hidden;
     transition: width 0.28s;
 
-    a{
+    a {
       text-decoration: none;
     }
   }
@@ -34,6 +34,33 @@
 
     .main-container {
       margin-left: $hideSideBarWidth;
+    }
+  }
+
+  // mobile responsive
+  .mobile {
+    .sidebar-container {
+      transition: transform 0.28s;
+      width: $sideBarWidth;
+    }
+
+    &.hideSidebar {
+      .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-$sideBarWidth, 0, 0);
+      }
+    }
+
+    .main-container {
+      margin-left: 0px;
+    }
+  }
+
+  .withoutAnimation {
+    .sidebar-container,
+    .main-container {
+      transition: none;
     }
   }
 }

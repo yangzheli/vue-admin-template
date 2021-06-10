@@ -6,6 +6,7 @@
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
+      :collapse-transition="false"
     >
       <router-link to="/dashboard">
         <el-menu-item index="1">
@@ -37,7 +38,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Item from "./Item.vue";
-import variables from '@/styles/variables.scss';
+import variables from "@/styles/variables.scss";
 
 export default {
   components: {
@@ -45,8 +46,8 @@ export default {
   },
   computed: {
     ...mapGetters(["sidebar"]),
+    // It doesn't work! Strange!
     variables() {
-      console.log(variables)
       return variables;
     },
     routes() {
@@ -64,3 +65,28 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/styles/variables.scss";
+
+.el-menu {
+  color: $menuText;
+  background: $menuBg;
+  border: none;
+
+  .el-menu-item {
+    color: $menuText;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $menuActiveText;
+      background: $menuHover;
+    }
+  }
+}
+
+.el-menu--collapse {
+  width: 3.5rem;
+}
+</style>
