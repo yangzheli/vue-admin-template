@@ -1,12 +1,13 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
+    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-mask" @click="handleClickOutside"></div>
     <sidebar class="sidebar-container"></sidebar>
     <div class="main-container">
       <div>
         <navbar></navbar>
       </div>
       <app-main></app-main>
+      <settings></settings>
     </div>
   </div>
 </template>
@@ -16,13 +17,15 @@
 import Sidebar from "./components/Sidebar/index.vue";
 import Navbar from "./components/Navbar.vue";
 import AppMain from "./components/AppMain.vue";
+import Settings from './components/Settings/index.vue';
 import ResizeMixin from "./mixin/ResizeHandler.js";
 
 export default {
   components: {
     Sidebar,
     Navbar,
-    AppMain
+    AppMain,
+    Settings
   },
   mixins: [ResizeMixin],
   computed: {
@@ -61,7 +64,7 @@ export default {
     left: 0;
   }
 
-  .drawer-bg {
+  .drawer-mask {
     position: absolute;
     z-index: 9;
     top: 0;

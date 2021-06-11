@@ -1,3 +1,13 @@
 <template>
-  <div class="app-container">403</div>
+  <exception iconClass="403-page"></exception>
 </template>
+
+<script>
+import Exception from "@/components/Exception/index.vue";
+
+export default {
+  components: {
+    Exception
+  }
+};
+</script>

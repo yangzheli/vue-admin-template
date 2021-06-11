@@ -1,5 +1,5 @@
 <template>
-  <svg :class="size" class="svg-icon">
+  <svg class="svg-icon" :style="{ '--size': `${size}` + 'rem' }">
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -13,11 +13,8 @@ export default {
       required: true
     },
     size: {
-      type: String,
-      default: "small",
-      validator(value) {
-        return ["small", "middle", "large"].includes(value);
-      }
+      type: Number,
+      default: 1
     }
   },
   computed: {
@@ -29,9 +26,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$iconSize: var(--size);
+
 .svg-icon {
-  width: 1rem;
-  height: 1rem;
+  width: $iconSize;
+  height: $iconSize;
   fill: currentColor;
   overflow: hidden;
 }

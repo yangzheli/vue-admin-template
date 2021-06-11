@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="toggle" @click="toggleClick">
-      <svg-icon :iconClass="toggle" size="middle"></svg-icon>
+      <svg-icon :iconClass="toggle" :size="1.5"></svg-icon>
     </div>
     <breadcrumb></breadcrumb>
   </div>
