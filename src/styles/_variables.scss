@@ -9,9 +9,12 @@ $sideBarWidth: 12rem;
 $hideSideBarWidth: 3.5rem;
 
 // settings
+$settingsWidth: 16rem;
 $settingsBg: #ffffff;
+$handleButtonTop: 15rem;
+$handleButtonWidth: 3rem;
 $handleButtonBg: #409eff;
-$handleButtonText:#ffffff;
+$handleButtonText: #ffffff;
 
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
@@ -24,7 +27,10 @@ $handleButtonText:#ffffff;
   sideBarWidth: $sideBarWidth;
   hideSideBarWidth: $hideSideBarWidth;
 
+  settingsWidth: $settingsWidth;
   settingsBg: $settingsBg;
+  handleButtonTop: $handleButtonTop;
+  handleButtonWidth: $handleButtonWidth;
   handleButtonBg: $handleButtonBg;
-  handleButtonText:$handleButtonText;
+  handleButtonText: $handleButtonText;
 }

@@ -18,7 +18,7 @@
 import { mapGetters } from "vuex";
 import Item from "./Item.vue";
 import SidebarItem from "./SidebarItem.vue";
-import variables from "@/styles/variables.scss";
+import variables from "@/styles/_variables.scss";
 
 export default {
   components: {
@@ -48,37 +48,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables.scss";
+@import "@/styles/_variables.scss";
+@import "@/styles/_mixin.scss";
 
 .el-menu {
-  color: $menuText;
-  background: $menuBg;
+  @include color("menuText");
+  @include background_color("menuBg");
   border: none;
 
   & /deep/ .el-menu-item {
-    color: $menuText;
+    @include color("menuText");
 
     &:hover,
     &:active,
     &:focus {
-      color: $menuActiveText;
-      background: $menuHover;
+      @include color("menuActiveText");
+      @include background-color("menuHover");
     }
   }
 
   & /deep/ .el-menu-item.is-active {
-    color: $menuActiveText;
-    background: $menuHover;
+    @include color("menuActiveText");
+    @include background-color("menuHover");
   }
 
   & /deep/ .el-submenu__title {
-    color: $menuText;
+    @include color("menuText");
 
     &:hover,
     &:active,
     &:focus {
-      color: $menuActiveText;
-      background: $menuHover;
+      @include color("menuActiveText");
+      @include background-color("menuHover");
     }
   }
 
@@ -89,8 +90,8 @@ export default {
       &:hover,
       &:active,
       &:focus {
-        color: $menuActiveText;
-        background: $subMenuHover;
+        @include color("menuActiveText");
+        @include background-color("subMenuHover");
       }
     }
   }

@@ -1,10 +1,57 @@
 <template>
   <div class="drawer-container">
+    <h3>Page Style Setting</h3>
+
     <div class="drawer-item">
-      <span>Page Style Setting</span>
+      <span>Dark Style</span>
+      <el-switch v-model="darkStyle"></el-switch>
     </div>
-    <div class="drawer-item">
-      <span>Theme Color</span>
-    </div>
+
+    <h3>Theme Color</h3>
   </div>
 </template>
+
+<script>
+const body = document.body;
+
+export default {
+  computed: {
+    darkStyle: {
+      get: function() {
+        let value = this.$store.state.settings.darkStyle;
+        body.setAttribute("data-theme", value ? "dark" : "light");
+        return value;
+      },
+      set: function(value) {
+        this.$store.dispatch("settings/changeSetting", {
+          key: "darkStyle",
+          value: value
+        });
+        body.setAttribute("data-theme", value ? "dark" : "light");
+      }
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.drawer-container {
+  padding: 1.5rem;
+
+  h3 {
+    margin-bottom: 0.75rem;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .drawer-item {
+    padding: 0.75rem 0;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+
+    .el-switch {
+      float: right;
+    }
+  }
+}
+</style>

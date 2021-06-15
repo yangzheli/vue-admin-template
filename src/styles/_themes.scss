@@ -1,0 +1,31 @@
+$themes: (
+  light: (
+    // sidebar
+    menuBg: #304156,
+    menuHover: #263445,
+    menuText: #bfcbd9,
+    menuActiveText: #409eff,
+    subMenuBg: #1f2d3d,
+    subMenuHover: #001528,
+
+    // settings
+    settingsBg: #ffffff,
+    handleButtonBg: #409eff,
+    handleButtonText: #ffffff
+  ),
+
+  dark: (
+    // sidebar
+    menuBg: #000000,
+    menuHover: #000000,
+    menuText: #000000,
+    menuActiveText: #000000,
+    subMenuBg: #000000,
+    subMenuHover: #000000,
+
+    // settings
+    settingsBg: #000000,
+    handleButtonBg: #000000,
+    handleButtonText: #000000
+  )
+);

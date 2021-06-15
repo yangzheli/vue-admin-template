@@ -34,14 +34,4 @@ $iconSize: var(--size);
   fill: currentColor;
   overflow: hidden;
 }
-
-.middle {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.large {
-  width: 2rem;
-  height: 2rem;
-}
 </style>
