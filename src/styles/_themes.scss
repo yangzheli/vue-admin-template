@@ -2,30 +2,32 @@ $themes: (
   light: (
     // sidebar
     menuBg: #304156,
-    menuHover: #263445,
+    menuHoverBg: #263445,
     menuText: #bfcbd9,
     menuActiveText: #409eff,
     subMenuBg: #1f2d3d,
-    subMenuHover: #001528,
+    submenuHoverBg: #001528,
 
     // settings
     settingsBg: #ffffff,
     handleButtonBg: #409eff,
-    handleButtonText: #ffffff
+    handleButtonText: #ffffff,
+    itemsText: rgba(0, 0, 0, 0.85)
   ),
 
   dark: (
     // sidebar
-    menuBg: #000000,
-    menuHover: #000000,
-    menuText: #000000,
-    menuActiveText: #000000,
+    menuBg: #1f1f1f,
+    menuHoverBg: #409eff,
+    menuText: #ffffff,
+    menuActiveText: #ffffff,
     subMenuBg: #000000,
-    subMenuHover: #000000,
+    submenuHoverBg: #409eff,
 
     // settings
-    settingsBg: #000000,
-    handleButtonBg: #000000,
-    handleButtonText: #000000
+    settingsBg: #1f1f1f,
+    handleButtonBg: #409eff,
+    handleButtonText: #ffffff,
+    itemsText: rgba(255, 255, 255, 0.85)
   )
 );

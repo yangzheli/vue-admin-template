@@ -35,19 +35,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/_mixin.scss";
+
 .drawer-container {
   padding: 1.5rem;
 
   h3 {
     margin-bottom: 0.75rem;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.85);
+    @include color("itemsText");
   }
 
   .drawer-item {
     padding: 0.75rem 0;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.85);
+    @include color("itemsText");
 
     .el-switch {
       float: right;

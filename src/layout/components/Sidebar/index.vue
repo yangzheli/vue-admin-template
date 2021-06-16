@@ -59,39 +59,47 @@ export default {
   & /deep/ .el-menu-item {
     @include color("menuText");
 
-    &:hover,
+    &:hover{
+      @include color("menuActiveText");
+      @include background_color("menuBg");
+    } 
+      
     &:active,
     &:focus {
       @include color("menuActiveText");
-      @include background-color("menuHover");
+      @include background-color("menuHoverBg");
     }
   }
 
   & /deep/ .el-menu-item.is-active {
     @include color("menuActiveText");
-    @include background-color("menuHover");
+    @include background-color("menuHoverBg");
   }
 
   & /deep/ .el-submenu__title {
     @include color("menuText");
 
-    &:hover,
+    &:hover{
+      @include color("menuActiveText");
+      @include background-color("menuHoverBg");
+    }
+
     &:active,
     &:focus {
       @include color("menuActiveText");
-      @include background-color("menuHover");
+      @include background-color("menuHoverBg");
     }
   }
 
   & /deep/ .el-menu {
-    background: $subMenuBg;
+    @include background-color("subMenuBg");
 
     .el-menu-item {
       &:hover,
       &:active,
       &:focus {
         @include color("menuActiveText");
-        @include background-color("subMenuHover");
+        @include background-color("submenuHoverBg");
       }
     }
   }

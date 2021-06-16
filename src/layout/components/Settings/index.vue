@@ -71,7 +71,7 @@ export default {
     right: 0;
     width: $settingsWidth;
     height: 100vh;
-    background: $settingsBg;
+    @include background-color("settingsBg");
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.08);
     transition: all 0.25s cubic-bezier(0.7, 0.3, 0.1, 1);
     transform: translateX(100%);
