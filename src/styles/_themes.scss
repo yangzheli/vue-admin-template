@@ -1,12 +1,24 @@
 $themes: (
   light: (
+    // body
+    bodyBg: #ffffff,
+
     // sidebar
     menuBg: #304156,
     menuHoverBg: #263445,
     menuText: #bfcbd9,
-    menuActiveText: #409eff,
+    menuHoverText: #409eff,
     subMenuBg: #1f2d3d,
     submenuHoverBg: #001528,
+
+    // navbar
+    navbarBg: #ffffff,
+    navbarText: rgba(0, 0, 0, 0.65),
+    navbarLastText: rgba(0, 0, 0, 0.45),
+    navbarHoverText: #409eff,
+
+    // main
+    appMainText: rgba(0, 0, 0, 0.85),
 
     // settings
     settingsBg: #ffffff,
@@ -16,13 +28,25 @@ $themes: (
   ),
 
   dark: (
+    // body
+    bodyBg: #000000,
+
     // sidebar
     menuBg: #1f1f1f,
     menuHoverBg: #409eff,
-    menuText: #ffffff,
-    menuActiveText: #ffffff,
-    subMenuBg: #000000,
+    menuText: rgba(255, 255, 255, 0.65),
+    menuHoverText: #ffffff,
+    subMenuBg: #141414,
     submenuHoverBg: #409eff,
+
+    // navbar
+    navbarBg: #1f1f1f,
+    navbarText: rgba(255, 255, 255, 0.65),
+    navbarLastText: rgba(255, 255, 255, 0.45),
+    navbarHoverText: #409eff,
+
+    // main
+    appMainText: rgba(255, 255, 255, 0.85),
 
     // settings
     settingsBg: #1f1f1f,

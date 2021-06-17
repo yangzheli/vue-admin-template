@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <svg-icon :iconClass="iconClass" :size="32"></svg-icon>
-    <a href>
+    <router-link to="/">
       <el-button type="primary">回到首页</el-button>
-    </a>
+    </router-link>
   </div>
 </template>
 

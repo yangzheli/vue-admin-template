@@ -1,8 +1,12 @@
+// body
+$bodyLightBg: #ffffff;
+$bodyDarkBg: #000000;
+
 // sidebar
 $menuBg: #304156;
 $menuHoverBg: #263445;
 $menuText: #bfcbd9;
-$menuActiveText: #409eff;
+$menuHoverText: #409eff;
 $subMenuBg: #1f2d3d;
 $subMenuHover: #001528;
 $sideBarWidth: 12rem;
@@ -18,10 +22,13 @@ $handleButtonText: #ffffff;
 
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
+  bodyLightBg: $bodyLightBg;
+  bodyDarkBg: $bodyDarkBg;
+
   menuBg: $menuBg;
   menuHoverBg: $menuHoverBg;
   menuText: $menuText;
-  menuActiveText: $menuActiveText;
+  menuHoverText: $menuHoverText;
   subMenuBg: $subMenuBg;
   subMenuHover: $subMenuHover;
   sideBarWidth: $sideBarWidth;

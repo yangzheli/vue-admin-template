@@ -17,7 +17,7 @@
 import Sidebar from "./components/Sidebar/index.vue";
 import Navbar from "./components/Navbar.vue";
 import AppMain from "./components/AppMain.vue";
-import Settings from './components/Settings/index.vue';
+import Settings from "./components/Settings/index.vue";
 import ResizeMixin from "./mixin/ResizeHandler.js";
 
 export default {
@@ -54,10 +54,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/_mixin.scss";
+
 .app-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
+
   &.mobile.openSidebar {
     position: fixed;
     top: 0;
@@ -72,6 +75,10 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar-container {
+    @include background_color("menuBg");
   }
 }
 </style>

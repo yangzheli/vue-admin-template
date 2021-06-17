@@ -19,7 +19,7 @@ export default {
     darkStyle: {
       get: function() {
         let value = this.$store.state.settings.darkStyle;
-        body.setAttribute("data-theme", value ? "dark" : "light");
+        body.setAttribute("theme", value ? "dark" : "light");
         return value;
       },
       set: function(value) {
@@ -27,7 +27,7 @@ export default {
           key: "darkStyle",
           value: value
         });
-        body.setAttribute("data-theme", value ? "dark" : "light");
+        body.setAttribute("theme", value ? "dark" : "light");
       }
     }
   }

@@ -1,68 +1,75 @@
-@import './mixin.scss';
-
-#app {
-  .sidebar-container {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    width: $sideBarWidth;
-    height: 100%;
-    @include background-color("menuBg");
-    overflow: hidden;
-    transition: width 0.28s;
-
-    a {
-      text-decoration: none;
-    }
+body {
+  &[theme="light"] {
+    background-color: $bodyLightBg;
   }
 
-  .main-container {
-    position: relative;
-    min-height: 100%;
-    margin-left: $sideBarWidth;
-    transition: margin-left 0.28s;
-    -webkit-transition: margin-left 0.28s;
-
-    .app-container {
-      padding: 1.5rem;
-    }
+  &[theme="dark"] {
+    background-color: $bodyDarkBg;
   }
 
-  .hideSidebar {
+  #app {
     .sidebar-container {
-      width: $hideSideBarWidth;
-    }
-
-    .main-container {
-      margin-left: $hideSideBarWidth;
-    }
-  }
-
-  // mobile responsive
-  .mobile {
-    .sidebar-container {
-      transition: transform 0.28s;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
       width: $sideBarWidth;
-    }
+      height: 100%;
+      overflow: hidden;
+      transition: width 0.28s;
 
-    &.hideSidebar {
-      .sidebar-container {
-        pointer-events: none;
-        transition-duration: 0.3s;
-        transform: translate3d(-$sideBarWidth, 0, 0);
+      a {
+        text-decoration: none;
       }
     }
 
     .main-container {
-      margin-left: 0px;
-    }
-  }
+      position: relative;
+      min-height: 100%;
+      margin-left: $sideBarWidth;
+      transition: margin-left 0.28s;
+      -webkit-transition: margin-left 0.28s;
 
-  .withoutAnimation {
-    .sidebar-container,
-    .main-container {
-      transition: none;
+      .app-container {
+        padding: 1.5rem;
+      }
+    }
+
+    .hideSidebar {
+      .sidebar-container {
+        width: $hideSideBarWidth;
+      }
+
+      .main-container {
+        margin-left: $hideSideBarWidth;
+      }
+    }
+
+    // mobile responsive
+    .mobile {
+      .sidebar-container {
+        transition: transform 0.28s;
+        width: $sideBarWidth;
+      }
+
+      &.hideSidebar {
+        .sidebar-container {
+          pointer-events: none;
+          transition-duration: 0.3s;
+          transform: translate3d(-$sideBarWidth, 0, 0);
+        }
+      }
+
+      .main-container {
+        margin-left: 0px;
+      }
+    }
+
+    .withoutAnimation {
+      .sidebar-container,
+      .main-container {
+        transition: none;
+      }
     }
   }
 }

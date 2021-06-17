@@ -44,7 +44,7 @@ export const constantRoutes = [{
     component: Layout,
     redirect: '/exception/403',
     meta: {
-      title: 'exception',
+      title: 'Exception',
       icon: 'exception'
     },
     children: [{
@@ -70,7 +70,7 @@ export const constantRoutes = [{
       path: 'index',
       component: () => import('@/views/user/index.vue'),
       meta: {
-        title: 'user',
+        title: 'User',
         icon: 'user'
       }
     }]

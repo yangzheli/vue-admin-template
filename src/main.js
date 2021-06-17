@@ -14,6 +14,8 @@ import app from './App.vue';
 
 import router from './router';
 
+import './permission'; // permission control
+
 import '@/styles/index.scss'; // golbal css
 
 import './icons'; // icons
@@ -23,7 +25,3 @@ new Vue({
   router: router,
   render: h => h(app)
 })
-
-export default {
-  router
-}

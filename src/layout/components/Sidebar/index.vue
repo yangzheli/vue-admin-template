@@ -5,7 +5,7 @@
       :collapse="isCollapse"
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
-      :active-text-color="variables.menuActiveText"
+      :active-text-color="variables.menuHoverText"
       :collapse-transition="false"
       mode="vertical"
     >
@@ -60,19 +60,19 @@ export default {
     @include color("menuText");
 
     &:hover{
-      @include color("menuActiveText");
+      @include color("menuHoverText");
       @include background_color("menuBg");
     } 
       
     &:active,
     &:focus {
-      @include color("menuActiveText");
+      @include color("menuHoverText");
       @include background-color("menuHoverBg");
     }
   }
 
   & /deep/ .el-menu-item.is-active {
-    @include color("menuActiveText");
+    @include color("menuHoverText");
     @include background-color("menuHoverBg");
   }
 
@@ -80,13 +80,13 @@ export default {
     @include color("menuText");
 
     &:hover{
-      @include color("menuActiveText");
-      @include background-color("menuHoverBg");
+      @include color("menuHoverText");
+      @include background-color("menuBg");
     }
 
     &:active,
     &:focus {
-      @include color("menuActiveText");
+      @include color("menuHoverText");
       @include background-color("menuHoverBg");
     }
   }
@@ -95,10 +95,14 @@ export default {
     @include background-color("subMenuBg");
 
     .el-menu-item {
-      &:hover,
+      &:hover {
+        @include color("menuHoverText");
+        @include background-color("subMenuBg");
+      }
+
       &:active,
       &:focus {
-        @include color("menuActiveText");
+        @include color("menuHoverText");
         @include background-color("submenuHoverBg");
       }
     }

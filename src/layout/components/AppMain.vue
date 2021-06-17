@@ -5,10 +5,13 @@
 </template>
 
 <style lang="scss" scoped>
+@import "@/styles/_mixin.scss";
+
 .app-main {
-  min-height: calc(100vh - 3rem);
-  width: 100%;
   position: relative;
+  width: 100%;
+  min-height: calc(100vh - 3rem);
+  @include color("appMainText");
   overflow: hidden;
 }
 </style>
