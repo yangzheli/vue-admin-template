@@ -1,2 +1,12 @@
-@import './_variables.scss';
-@import './_layout.scss';
+@import "./_variables.scss";
+@import "./_layout.scss";
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
