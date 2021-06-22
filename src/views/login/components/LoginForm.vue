@@ -1,71 +1,77 @@
 <template>
   <el-form v-model="loginForm" :rules="loginRules">
     <el-tabs v-model="activeName">
-      <el-tab-pane label="账号密码登录" name="first">
-        <el-input type="text" v-model="loginForm.username" placeholder="用户名：admin/user">
-          <template slot="prepend">
-            <svg-icon iconClass="user" :size="1"></svg-icon>
-          </template>
-        </el-input>
+      <el-tab-pane :label="$t('login.accountLogin')" name="first">
+        <div class="tab-item">
+          <el-input type="text" v-model="loginForm.username" :placeholder="$t('login.username')">
+            <template slot="prepend">
+              <svg-icon iconClass="user" :size="1"></svg-icon>
+            </template>
+          </el-input>
+        </div>
 
-        <el-input
-          :type="hidden ? 'password' : 'text'"
-          v-model="loginForm.password"
-          placeholder="密码：any string that satisfies the format"
-        >
-          <template slot="prepend">
-            <svg-icon iconClass="password" :size="1"></svg-icon>
-          </template>
-          <template slot="append">
-            <svg-icon
-              :iconClass="hidden ? 'hidden' : 'visible'"
-              :size="1"
-              @click="hidden = !hidden"
-            ></svg-icon>
-          </template>
-        </el-input>
+        <div class="tab-item">
+          <el-input
+            :type="hidden ? 'password' : 'text'"
+            v-model="loginForm.password"
+            :placeholder="$t('login.password')"
+          >
+            <template slot="prepend">
+              <svg-icon iconClass="password" :size="1"></svg-icon>
+            </template>
+            <template slot="append">
+              <svg-icon
+                :iconClass="hidden ? 'hidden' : 'visible'"
+                :size="1"
+                @click="hidden = !hidden"
+              ></svg-icon>
+            </template>
+          </el-input>
+        </div>
       </el-tab-pane>
 
-      <el-tab-pane label="手机号登录" name="second">
-        <el-input type="text" v-model="loginForm.username" placeholder="请输入用户名">
-          <template slot="prepend">
-            <svg-icon v-if="hidden" iconClass="mobile" :size="1"></svg-icon>
-          </template>
-        </el-input>
+      <el-tab-pane :label="$t('login.phoneLogin')" name="second">
+        <div class="tab-item">
+          <el-input type="text" v-model="loginForm.username" :placeholder="$t('login.phoneNumber')">
+            <template slot="prepend">
+              <svg-icon v-if="hidden" iconClass="mobile" :size="1"></svg-icon>
+            </template>
+          </el-input>
+        </div>
 
-        <el-input
-          :type="hidden ? 'password' : 'text'"
-          v-model="loginForm.password"
-          placeholder="请输入密码"
-        >
-          <template slot="prepend">
-            <svg-icon v-if="hidden" iconClass="sms" :size="1"></svg-icon>
-          </template>
-        </el-input>
+        <div class="tab-item">
+          <el-input
+            :type="hidden ? 'password' : 'text'"
+            v-model="loginForm.password"
+            :placeholder="$t('login.verificationCode')"
+          >
+            <template slot="prepend">
+              <svg-icon v-if="hidden" iconClass="sms" :size="1"></svg-icon>
+            </template>
+          </el-input>
 
-        <el-button
-          :class="{'disabled':phoneCodeDisabled}"
-          type="primary"
-          v-on:click="getPhoneCode"
-          :disabled="phoneCodeDisabled"
-        >{{phoneCodeMsg}}</el-button>
+          <el-button
+            :class="{'disabled':getCodeDisabled}"
+            type="primary"
+            v-on:click="getCode"
+            :disabled="getCodeDisabled"
+          >{{$t('login.getCode')}}</el-button>
+        </div>
       </el-tab-pane>
     </el-tabs>
 
     <div class="form-item">
-      <el-checkbox v-model="checked">记住密码</el-checkbox>
+      <el-checkbox v-model="checked">{{$t('login.rememberPassword')}}</el-checkbox>
       <a href="#/retrieve" target="_blank">
-        <span>忘记密码？</span>
+        <span>{{$t('login.forgetPassword')}}</span>
       </a>
     </div>
 
     <div class="submit">
-      <el-button v-on:click="login">登录</el-button>
+      <el-button v-on:click="login">{{$t('login.login')}}</el-button>
     </div>
 
-    <div class="sign-in-with">
-      <sign-in-with></sign-in-with>
-    </div>
+    <sign-in-with></sign-in-with>
   </el-form>
 </template>
 
@@ -79,15 +85,14 @@ export default {
   data() {
     return {
       activeName: "first",
-
       checked: true,
-
       loginForm: {
         username: "",
         password: ""
       },
       hidden: true,
       code: "",
+      phoneCodeMsg: "获取验证码",
       generateCode: []
       // rememberPassword: false,
     };
@@ -109,6 +114,10 @@ export default {
     draw: function() {
       const canvas = document.getElementById("canvas");
       this.generateCode = verifyCode(canvas);
+    },
+
+    getCode:function(){
+
     },
 
     // 登录
@@ -138,29 +147,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/_variables.scss";
+
 .el-form {
   width: 20rem;
   margin: 0 auto;
+  text-align: left;
 
   .el-tabs {
     & /deep/ .el-tabs__nav-wrap::after {
       content: none;
     }
-  }
 
-  .el-input {
-    margin: 0.5rem 0;
-    border: 1px solid #d9d9d9;
+    .tab-item {
+      display: flex;
 
-    & /deep/ .el-input-group__prepend,
-    & /deep/ .el-input-group__append {
-      padding: 0 0.5rem;
-      background-color: #ffffff;
-      border: none;
-    }
+      .el-input {
+        margin: 0.5rem 0;
+        border: 1px solid #d9d9d9;
 
-    & /deep/ .el-input__inner {
-      border: none;
+        & /deep/ .el-input-group__prepend,
+        & /deep/ .el-input-group__append {
+          padding: 0 0.5rem;
+          background-color: #ffffff;
+          border: none;
+        }
+
+        & /deep/ .el-input__inner {
+          border: none;
+        }
+      }
+
+      button {
+        margin: 0.5rem 0 0.5rem 1rem;
+      }
     }
   }
 
@@ -168,11 +188,22 @@ export default {
     margin: 0.5rem 0;
 
     a {
+      float: right;
+      color: $loginText;
+      font-size: 14px;
       text-decoration: none;
     }
   }
 
   .submit {
+    button {
+      width: 100%;
+      margin: 0.5rem 0;
+      color: #ffffff;
+      background: $loginText;
+      border: 1px solid $loginText;
+      font-size: 1.2rem;
+    }
   }
 }
 </style>

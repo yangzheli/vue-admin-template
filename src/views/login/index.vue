@@ -1,10 +1,20 @@
 <template>
   <div class="login-container">
-    <div class="login-lang"></div>
+    <div class="login-lang">
+      <el-dropdown placement="bottom" @command="clickDropdown">
+        <svg-icon iconClass="language" :size="1.5"></svg-icon>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="CN">中文</el-dropdown-item>
+            <el-dropdown-item command="EN">English</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
 
     <div class="login-content">
       <div class="login-header">
-        <p class="en">Vue Design</p>
+        <p>Vue Design</p>
       </div>
 
       <div class="login-main">
@@ -18,24 +28,38 @@
 
 <script>
 import LoginForm from "./components/LoginForm.vue";
-import { Validator } from "@/utils/validate.js";
-import { verifyCode } from "@/utils/verifyCode.js";
 
 export default {
   components: {
     LoginForm
+  },
+  methods:{
+    clickDropdown:function(lang){
+      localStorage.lang = lang;
+      this.$i18n.locale = lang;
+    }
   }
 };
 </script>
 
 <style lang="scss" scope>
 .login-container {
-  width: 10%;
-  height: 10%;
-  background-image: url("@/icons/svg/back.svg");
-// background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1060px' height='580px' viewBox='0 0 1060 580' preserveAspectRatio='xMidYMid meet' ><rect id='svgEditorBackground' x='0' y='0' width='1060' height='580' style='fill: none; stroke: none;'/><rect x='115' y='111' stroke='black' id='e1_rectangle' style='stroke-width: 1px;' width='144' height='120' fill='khaki'/><polyline stroke='black' stroke-width='1' id='e2_polyline' style='fill: none;' points='115 109 187 69 257 109' /><text fill='black' x='257' y='33' id='e4_texte' style='font-family: Arial; font-size: 20px;'></text><rect x='179' y='19' stroke='black' id='e5_rectangle' style='stroke-width: 1px;' width='16' height='54' fill='khaki' /></svg>"); 
-background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-image: url("@/assets/login-bg.svg");
+  background-size: cover;
   background-repeat: no-repeat;
+
+  .login-lang {
+    color: rgba(0, 0, 0, 0.65);
+    text-align: right;
+
+    svg {
+      margin-right: 1rem;
+      padding: 1rem;
+      cursor: pointer;
+    }
+  }
 
   .login-content {
     position: absolute;
@@ -45,110 +69,25 @@ background-size: cover;
     height: 25em;
     padding: 5em;
     transform: translate(-50%, -50%);
-    // background: url("@/assets/login-form-bg.png");
-    background-size: 95% 100%;
-    background-repeat: no-repeat;
-    text-align: center;
 
-    .login-title {
+    .login-header {
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+
       p {
-        text-align: center;
-        background: linear-gradient(#fbfcff, #6987ef);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
+        margin: 0 0 1rem 0;
       }
-
-      .zh {
-        font-size: 2em;
-        margin: 0.5em 0;
-        letter-spacing: 0.6em;
-      }
-
-      .en {
-        font-size: 0.8em;
-        margin: 0.5em 1em 2em 0;
-        letter-spacing: 0.3em;
-      }
-    }
-
-    .login-item {
-      width: 50%;
-      margin: 1em auto;
-
-      canvas {
-        position: relative;
-        top: 0;
-        left: 1.6em;
-        border: 1px solid #707287;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      & >>> .el-input-group__prepend {
-        width: 25px;
-        padding: 0 0.5em;
-        border: none;
-        background-color: #ffffff;
-      }
-
-      & >>> .el-input__inner {
-        border: none;
-        font-size: 1.1em;
-      }
-    }
-
-    .verify {
-      margin-bottom: 0;
-
-      .el-input {
-        position: relative;
-        top: -1.1em;
-        left: -1.9em;
-        width: 60%;
-      }
-    }
-
-    .setting {
-      margin-top: 0;
-      color: #ffffff;
-
-      & >>> .el-radio__label {
-        color: #ffffff;
-      }
-
-      & a {
-        color: #ffffff;
-        text-decoration: none;
-
-        span {
-          margin-left: 20em;
-          cursor: pointer;
-        }
-
-        span:hover {
-          color: #3d58b5;
-        }
-      }
-    }
-
-    button {
-      font-size: 1.2em;
-      letter-spacing: 1.4em;
-      padding: 0.6em 8em;
-      color: #ffffff;
-      background: #3d58b5;
-      border: 1px solid #3d58b5;
     }
   }
 
   .login-footer {
     position: absolute;
-    bottom: 2em;
+    bottom: 2rem;
     left: 50%;
+    color: rgba(0, 0, 0, 0.45);
     transform: translate(-50%, -50%);
-    letter-spacing: 0.3em;
-    color: #ffffff;
+    letter-spacing: 0.1rem;
   }
 }
 </style>

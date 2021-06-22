@@ -2,6 +2,9 @@
 $bodyLightBg: #ffffff;
 $bodyDarkBg: #000000;
 
+// login
+$loginText:#409eff;
+
 // sidebar
 $menuBg: #304156;
 $menuHoverBg: #263445;
@@ -24,6 +27,8 @@ $handleButtonText: #ffffff;
 :export {
   bodyLightBg: $bodyLightBg;
   bodyDarkBg: $bodyDarkBg;
+
+  loginText: $loginText;
 
   menuBg: $menuBg;
   menuHoverBg: $menuHoverBg;

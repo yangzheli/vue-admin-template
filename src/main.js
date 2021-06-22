@@ -16,6 +16,8 @@ import router from './router';
 
 import './permission'; // permission control
 
+import i18n from '@/locales/index.js';  // internationalization
+
 import '@/styles/index.scss'; // golbal css
 
 import './icons'; // icons
@@ -23,5 +25,6 @@ import './icons'; // icons
 new Vue({
   el: '#app',
   router: router,
+  i18n,
   render: h => h(app)
 })
