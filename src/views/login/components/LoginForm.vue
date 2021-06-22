@@ -32,21 +32,24 @@
 
       <el-tab-pane :label="$t('login.phoneLogin')" name="second">
         <div class="tab-item">
-          <el-input type="text" v-model="loginForm.username" :placeholder="$t('login.phoneNumber')">
+          <el-input
+            type="text"
+            v-model="loginForm.phoneNumber"
+            :placeholder="$t('login.phoneNumber')"
+          >
             <template slot="prepend">
-              <svg-icon v-if="hidden" iconClass="mobile" :size="1"></svg-icon>
+              <svg-icon iconClass="mobile" :size="1"></svg-icon>
             </template>
           </el-input>
         </div>
 
         <div class="tab-item">
           <el-input
-            :type="hidden ? 'password' : 'text'"
-            v-model="loginForm.password"
+            v-model="loginForm.verificationCode"
             :placeholder="$t('login.verificationCode')"
           >
             <template slot="prepend">
-              <svg-icon v-if="hidden" iconClass="sms" :size="1"></svg-icon>
+              <svg-icon iconClass="sms" :size="1"></svg-icon>
             </template>
           </el-input>
 
@@ -76,74 +79,80 @@
 </template>
 
 <script>
-import SignInWith from "./SignInWith.vue";
+import SignInWith from './SignInWith.vue'
 
 export default {
-  components: {
-    SignInWith
-  },
-  data() {
-    return {
-      activeName: "first",
-      checked: true,
-      loginForm: {
-        username: "",
-        password: ""
-      },
-      hidden: true,
-      code: "",
-      phoneCodeMsg: "获取验证码",
-      generateCode: []
-      // rememberPassword: false,
-    };
-  },
-  mounted: function() {
-    window.addEventListener("keydown", this.keydown);
-    this.draw();
-  },
-  destroyed: function() {
-    window.removeEventListener("keydown", this.keydown);
-  },
-  methods: {
+    components: {
+        SignInWith
+    },
+    data () {
+        const validateUsername = (rule, value, callback) => {
+            if (value === '') callback(new Error('请输入用户名!'))
+            else callback()
+        }
+
+        const validatePassword = (rule, value, callback) => {
+            if (value === '') callback(new Error('请输入密码!'))
+            else callback()
+        }
+
+        return {
+            activeName: 'first',
+            checked: true,
+            loginForm: {
+                username: '',
+                password: '',
+                phoneNumber: '',
+                verificationCode: ''
+            },
+            loginRules: {
+                username: [{ validator: validateUsername, trigger: 'blur' }],
+                password: [{ validator: validatePassword, trigger: 'blur' }]
+            },
+            hidden: true,
+            getCodeDisabled: false
+        }
+    },
+    mounted: function () {
+        window.addEventListener('keydown', this.keydown)
+        this.draw()
+    },
+    destroyed: function () {
+        window.removeEventListener('keydown', this.keydown)
+    },
+    methods: {
     // Enter 触发登录方法
-    keydown: function(e) {
-      if (e.keyCode === 13) this.login();
-    },
+        keydown: function (e) {
+            if (e.keyCode === 13) this.login()
+        },
 
-    // 绘制图形验证码
-    draw: function() {
-      const canvas = document.getElementById("canvas");
-      this.generateCode = verifyCode(canvas);
-    },
+        // 绘制图形验证码
+        draw: function () {
+            // const canvas = document.getElementById("canvas");
+            // this.generateCode = verifyCode(canvas);
+        },
 
-    getCode:function(){
+        getCode: function () {
+            const _this = this
 
-    },
+            // 定时器，倒计时 60s
+            let time = 60
+            let timer = null
+            timer = setInterval(function () {
+                if (time === 0) {
+                    _this.getCodeDisabled = false
+                    clearInterval(timer) // 清除定时器
+                } else {
+                    _this.getCodeDisabled = true
+                    time--
+                }
+            }, 1000)
+        },
 
-    // 登录
-    login: function(test) {
-      let loginForm = this.loginForm;
-
-      // 添加数据校验
-      let validator = new Validator();
-      validator.add(loginForm.username, "isNonEmpty", "用户名不能为空");
-      validator.add(loginForm.password, "isNonEmpty", "密码不能为空");
-      validator.add(
-        this.code,
-        `isEqualIngoreCase:${this.generateCode.join("")}`,
-        "验证码错误"
-      );
-      let errorMsg = validator.start();
-      if (errorMsg) {
-        this.$message({
-          message: errorMsg,
-          type: "error"
-        });
-        return;
-      }
+        // 登录
+        login: function () {}
     }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>

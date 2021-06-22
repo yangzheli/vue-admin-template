@@ -9,13 +9,13 @@
 
 <script>
 export default {
-  props: {
-    iconClass: {
-      type: String,
-      required: true
+    props: {
+        iconClass: {
+            type: String,
+            required: true
+        }
     }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>

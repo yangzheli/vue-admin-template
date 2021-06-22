@@ -15,12 +15,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Item from "./Item.vue";
-import SidebarItem from "./SidebarItem.vue";
-import variables from "@/styles/_variables.scss";
+import { mapGetters } from 'vuex'
+import Item from './Item.vue'
+import SidebarItem from './SidebarItem.vue'
+import variables from '@/styles/_variables.scss'
 
 export default {
+    /* eslint-disable */
   components: {
     Item,
     SidebarItem
@@ -59,11 +60,11 @@ export default {
   & /deep/ .el-menu-item {
     @include color("menuText");
 
-    &:hover{
+    &:hover {
       @include color("menuHoverText");
       @include background_color("menuBg");
-    } 
-      
+    }
+
     &:active,
     &:focus {
       @include color("menuHoverText");
@@ -79,7 +80,7 @@ export default {
   & /deep/ .el-submenu__title {
     @include color("menuText");
 
-    &:hover{
+    &:hover {
       @include color("menuHoverText");
       @include background-color("menuBg");
     }

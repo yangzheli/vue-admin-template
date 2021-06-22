@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import Exception from "@/components/Exception/index.vue";
+import Exception from '@/components/Exception/index.vue'
 
 export default {
-  components: {
-    Exception
-  }
-};
+    components: {
+        Exception
+    }
+}
 </script>

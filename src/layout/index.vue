@@ -14,43 +14,43 @@
 
 <script>
 // import { mapGetters } from "vuex";
-import Sidebar from "./components/Sidebar/index.vue";
-import Navbar from "./components/Navbar.vue";
-import AppMain from "./components/AppMain.vue";
-import Settings from "./components/Settings/index.vue";
-import ResizeMixin from "./mixin/ResizeHandler.js";
+import Sidebar from './components/Sidebar/index.vue'
+import Navbar from './components/Navbar.vue'
+import AppMain from './components/AppMain.vue'
+import Settings from './components/Settings/index.vue'
+import ResizeMixin from './mixin/ResizeHandler.js'
 
 export default {
-  components: {
-    Sidebar,
-    Navbar,
-    AppMain,
-    Settings
-  },
-  mixins: [ResizeMixin],
-  computed: {
+    components: {
+        Sidebar,
+        Navbar,
+        AppMain,
+        Settings
+    },
+    mixins: [ResizeMixin],
+    computed: {
     // ...mapGetters(["permission_routes"])
-    classObj() {
-      return {
-        hideSidebar: !this.sidebar.opened,
-        openSidebar: this.sidebar.opened,
-        withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === "mobile"
-      };
+        classObj () {
+            return {
+                hideSidebar: !this.sidebar.opened,
+                openSidebar: this.sidebar.opened,
+                withoutAnimation: this.sidebar.withoutAnimation,
+                mobile: this.device === 'mobile'
+            }
+        },
+        sidebar () {
+            return this.$store.state.app.sidebar
+        },
+        device () {
+            return this.$store.state.app.device
+        }
     },
-    sidebar() {
-      return this.$store.state.app.sidebar;
-    },
-    device() {
-      return this.$store.state.app.device;
+    methods: {
+        handleClickOutside: function () {
+            this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+        }
     }
-  },
-  methods: {
-    handleClickOutside: function() {
-      this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
-    }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>

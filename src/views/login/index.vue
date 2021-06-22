@@ -27,19 +27,19 @@
 </template>
 
 <script>
-import LoginForm from "./components/LoginForm.vue";
+import LoginForm from './components/LoginForm.vue'
 
 export default {
-  components: {
-    LoginForm
-  },
-  methods:{
-    clickDropdown:function(lang){
-      localStorage.lang = lang;
-      this.$i18n.locale = lang;
+    components: {
+        LoginForm
+    },
+    methods: {
+        clickDropdown: function (lang) {
+            localStorage.lang = lang
+            this.$i18n.locale = lang
+        }
     }
-  }
-};
+}
 </script>
 
 <style lang="scss" scope>

@@ -6,23 +6,23 @@
 
 <script>
 export default {
-  name: "svg-icon",
-  props: {
-    iconClass: {
-      type: String,
-      required: true
+    name: 'svg-icon',
+    props: {
+        iconClass: {
+            type: String,
+            required: true
+        },
+        size: {
+            type: Number,
+            default: 1
+        }
     },
-    size: {
-      type: Number,
-      default: 1
+    computed: {
+        iconName: function () {
+            return `#icon-${this.iconClass}`
+        }
     }
-  },
-  computed: {
-    iconName: function() {
-      return `#icon-${this.iconClass}`;
-    }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -10,25 +10,25 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Breadcrumb from "@/components/Breadcrumb/index.vue";
+import { mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb/index.vue'
 
 export default {
-  components: {
-    Breadcrumb
-  },
-  computed: {
-    ...mapGetters(["sidebar"]),
-    toggle() {
-      return this.sidebar.opened ? "toggle-left" : "toggle-right";
+    components: {
+        Breadcrumb
+    },
+    computed: {
+        ...mapGetters(['sidebar']),
+        toggle () {
+            return this.sidebar.opened ? 'toggle-left' : 'toggle-right'
+        }
+    },
+    methods: {
+        toggleClick: function () {
+            this.$store.dispatch('app/toggleSideBar')
+        }
     }
-  },
-  methods: {
-    toggleClick: function() {
-      this.$store.dispatch("app/toggleSideBar");
-    }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>

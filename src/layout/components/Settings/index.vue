@@ -11,35 +11,35 @@
 </template>
 
 <script>
-import Items from "./Items.vue";
+import Items from './Items.vue'
 
 export default {
-  components: {
-    Items
-  },
-  data: function() {
-    return {
-      open: false
-    };
-  },
-  watch: {
-    open: function(value) {
-      const body = document.body;
-      if (value) body.setAttribute("class", "openSetting");
-      else body.removeAttribute("class", "openSetting");
+    components: {
+        Items
+    },
+    data: function () {
+        return {
+            open: false
+        }
+    },
+    watch: {
+        open: function (value) {
+            const body = document.body
+            if (value) body.setAttribute('class', 'openSetting')
+            else body.removeAttribute('class', 'openSetting')
+        }
+    },
+    mounted: function () {
+        this.insertToBody()
+    },
+    methods: {
+        insertToBody: function () {
+            const ele = this.$refs.setting
+            const body = document.body
+            body.insertBefore(ele, body.firstChild)
+        }
     }
-  },
-  mounted: function() {
-    this.insertToBody();
-  },
-  methods: {
-    insertToBody: function() {
-      const ele = this.$refs.setting;
-      const body = document.body;
-      body.insertBefore(ele, body.firstChild);
-    }
-  }
-};
+}
 </script>
 
 <style>
