@@ -1,32 +1,36 @@
 <template>
-  <el-form v-model="loginForm" :rules="loginRules">
+  <el-form :model="loginForm" :rules="loginRules" ref="loginForm">
     <el-tabs v-model="activeName">
       <el-tab-pane :label="$t('login.accountLogin')" name="first">
         <div class="tab-item">
-          <el-input type="text" v-model="loginForm.username" :placeholder="$t('login.username')">
-            <template slot="prepend">
-              <svg-icon iconClass="user" :size="1"></svg-icon>
-            </template>
-          </el-input>
+          <el-form-item prop="username">
+            <el-input type="text" v-model="loginForm.username" :placeholder="$t('login.username')">
+              <template slot="prepend">
+                <svg-icon iconClass="user" :size="1"></svg-icon>
+              </template>
+            </el-input>
+          </el-form-item>
         </div>
 
         <div class="tab-item">
-          <el-input
-            :type="hidden ? 'password' : 'text'"
-            v-model="loginForm.password"
-            :placeholder="$t('login.password')"
-          >
-            <template slot="prepend">
-              <svg-icon iconClass="password" :size="1"></svg-icon>
-            </template>
-            <template slot="append">
-              <svg-icon
-                :iconClass="hidden ? 'hidden' : 'visible'"
-                :size="1"
-                @click="hidden = !hidden"
-              ></svg-icon>
-            </template>
-          </el-input>
+          <el-form-item prop="password">
+            <el-input
+              :type="hidden ? 'password' : 'text'"
+              v-model="loginForm.password"
+              :placeholder="$t('login.password')"
+            >
+              <template slot="prepend">
+                <svg-icon iconClass="password" :size="1"></svg-icon>
+              </template>
+              <template slot="append">
+                <svg-icon
+                  :iconClass="hidden ? 'hidden' : 'visible'"
+                  :size="1"
+                  @click="hidden = !hidden"
+                ></svg-icon>
+              </template>
+            </el-input>
+          </el-form-item>
         </div>
       </el-tab-pane>
 
@@ -44,14 +48,16 @@
         </div>
 
         <div class="tab-item">
-          <el-input
-            v-model="loginForm.verificationCode"
-            :placeholder="$t('login.verificationCode')"
-          >
-            <template slot="prepend">
-              <svg-icon iconClass="sms" :size="1"></svg-icon>
-            </template>
-          </el-input>
+          <el-form-item prop="verificationCode">
+            <el-input
+              v-model="loginForm.verificationCode"
+              :placeholder="$t('login.verificationCode')"
+            >
+              <template slot="prepend">
+                <svg-icon iconClass="sms" :size="1"></svg-icon>
+              </template>
+            </el-input>
+          </el-form-item>
 
           <el-button
             :class="{'disabled':getCodeDisabled}"
@@ -96,6 +102,16 @@ export default {
             else callback()
         }
 
+        const validatePhone = (rule, value, callback) => {
+            if (value === '') callback(new Error('请输入手机号!'))
+            else callback()
+        }
+
+        const validateCode = (rule, value, callback) => {
+            if (value === '') callback(new Error('请输入验证码!'))
+            else callback()
+        }
+
         return {
             activeName: 'first',
             checked: true,
@@ -107,7 +123,9 @@ export default {
             },
             loginRules: {
                 username: [{ validator: validateUsername, trigger: 'blur' }],
-                password: [{ validator: validatePassword, trigger: 'blur' }]
+                password: [{ validator: validatePassword, trigger: 'blur' }],
+                phoneNumber: [{ validator: validatePhone, trigger: 'blur' }],
+                verificationCode: [{ validator: validateCode, trigger: 'blur' }]
             },
             hidden: true,
             getCodeDisabled: false
@@ -170,10 +188,12 @@ export default {
 
     .tab-item {
       display: flex;
+      flex-wrap:wrap;
 
       .el-input {
         margin: 0.5rem 0;
         border: 1px solid #d9d9d9;
+        flex-grow: 1;
 
         & /deep/ .el-input-group__prepend,
         & /deep/ .el-input-group__append {
