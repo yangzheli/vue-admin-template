@@ -12,7 +12,7 @@ const env = process.env.NODE_ENV
 if (env === 'development') {
     axios.defaults.baseURL = 'http://localhost:8080'
 } else if (env === 'production') {
-    axios.defaults.baseURL = 'http://w.e-scope.cn/tomcat1/berlinTownPage1/index.html'
+    axios.defaults.baseURL = 'http://localhost:8080'
 }
 
 // 设置请求超时时间
@@ -54,9 +54,6 @@ axios.interceptors.response.use(
 // 封装 get 方法
 export function get (url, params) {
     return new Promise((resolve, reject) => {
-    // 根据后台接口需要，统一加上 userId 和 token 两个参数
-        params.userId = store.state.userId
-        params.token = store.state.token
         axios.get(url, {
             params: params
         }).then(res => {
@@ -71,38 +68,6 @@ export function get (url, params) {
 export function post (url, params) {
     return new Promise((resolve, reject) => {
         axios.post(url, QS.stringify(params)).then(res => {
-            resolve(res.data)
-        }).catch(err => {
-            reject(err.data)
-        })
-    })
-}
-
-// 封装 post 方法,配置请求头数据格式为 application/json
-export function form (url, params) {
-    return new Promise((resolve, reject) => {
-    // 根据后台接口需要，统一加上 userId 和 token 两个参数
-        axios.post(url + '?userId=' + store.state.userId + '&token=' + store.state.token, JSON.stringify(params), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            resolve(res.data)
-        }).catch(err => {
-            reject(err.data)
-        })
-    })
-}
-
-// 封装 post 方法,配置请求头数据格式为 multipart/form-data
-export function upload (url, params) {
-    return new Promise((resolve, reject) => {
-    // 根据后台接口需要，统一加上 userId 和 token 两个参数
-        axios.post(url + '?userId=' + store.state.userId + '&token=' + store.state.token, params, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then(res => {
             resolve(res.data)
         }).catch(err => {
             reject(err.data)

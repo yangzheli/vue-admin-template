@@ -2,7 +2,9 @@
   <div class="login-container">
     <div class="login-lang">
       <el-dropdown placement="bottom" @command="clickDropdown">
-        <svg-icon iconClass="language" :size="1.5"></svg-icon>
+        <div>
+          <svg-icon iconClass="language" :size="1.5"></svg-icon>
+        </div>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item command="CN">中文</el-dropdown-item>
@@ -57,8 +59,8 @@ export default {
     text-align: right;
 
     svg {
-      margin-right: 1rem;
-      padding: 1rem;
+      margin-right: 2rem;
+      padding: 1rem 1rem 0 1rem;
       cursor: pointer;
     }
   }

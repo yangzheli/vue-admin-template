@@ -19,6 +19,8 @@ import '@/styles/index.scss' // golbal css
 
 import './icons' // icons
 
+import '../mock/index.js' // mock
+
 Vue.use(ElementUI)
 Vue.prototype.$api = api // mount the api to the vue prototype
 Vue.prototype.$store = store // mount the store to the vue prototype

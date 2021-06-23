@@ -1,10 +1,14 @@
 <template>
-  <el-form :model="loginForm" :rules="loginRules" ref="loginForm">
+  <el-form :model="loginForm" :rules="activeName === 'first' ? accountLoginRules : phoneLoginRules" ref="loginForm">
     <el-tabs v-model="activeName">
       <el-tab-pane :label="$t('login.accountLogin')" name="first">
         <div class="tab-item">
           <el-form-item prop="username">
-            <el-input type="text" v-model="loginForm.username" :placeholder="$t('login.username')">
+            <el-input
+              type="text"
+              v-model="loginForm.username"
+              :placeholder="$t('login.username')"
+            >
               <template slot="prepend">
                 <svg-icon iconClass="user" :size="1"></svg-icon>
               </template>
@@ -62,42 +66,50 @@
           </el-form-item>
 
           <el-button
-            :class="{'disabled':getCodeDisabled}"
+            :class="{ disabled: getCodeDisabled }"
             type="primary"
-            v-on:click="getCode"
+            @click="getCode"
             :disabled="getCodeDisabled"
-          >{{$t('login.getCode')}}</el-button>
+            >{{ $t("login.getCode") }}</el-button
+          >
         </div>
       </el-tab-pane>
     </el-tabs>
 
     <div class="form-item">
-      <el-checkbox v-model="checked">{{$t('login.rememberPassword')}}</el-checkbox>
+      <el-checkbox v-model="checked">{{
+        $t("login.rememberPassword")
+      }}</el-checkbox>
       <a href="#/retrieve" target="_blank">
-        <span>{{$t('login.forgetPassword')}}</span>
+        <span>{{ $t("login.forgetPassword") }}</span>
       </a>
     </div>
 
     <div class="submit">
-      <el-button v-on:click="login">{{$t('login.login')}}</el-button>
+      <el-button @click="handleLogin">{{ $t("login.login") }}</el-button>
     </div>
 
     <sign-in-with></sign-in-with>
 
-    <puzzle-panel v-if="puzzlePanelVisible" :puzzlePanelVisible="puzzlePanelVisible" v-on:invisible="getValue"></puzzle-panel>
+    <puzzle-panel
+      v-if="puzzlePanelVisible"
+      :puzzlePanelVisible="puzzlePanelVisible"
+      @invisible="getValue"
+    ></puzzle-panel>
   </el-form>
 </template>
 
 <script>
 import PuzzlePanel from './PuzzlePanel.vue'
 import SignInWith from './SignInWith.vue'
+import { user } from '@/api/api.js'
 
 export default {
     components: {
         PuzzlePanel,
         SignInWith
     },
-    data () {
+    data: function () {
         const validateUsername = (rule, value, callback) => {
             if (value === '') callback(new Error('请输入用户名!'))
             else callback()
@@ -108,12 +120,13 @@ export default {
             else callback()
         }
 
+        /* eslint-disable */
         const validatePhone = (rule, value, callback) => {
             if (value === '') callback(new Error('请输入手机号!'))
-            else if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) callback(new Error('手机号不合法!'))
-            else callback()
+            else if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) { callback(new Error('手机号不合法!')) } else callback()
         }
 
+        /* eslint-disable */
         const validateCode = (rule, value, callback) => {
             if (value === '') callback(new Error('请输入验证码!'))
             else callback()
@@ -128,9 +141,12 @@ export default {
                 phoneNumber: '',
                 verificationCode: ''
             },
-            loginRules: {
+            accountLoginRules: {
                 username: [{ validator: validateUsername, trigger: 'blur' }],
-                password: [{ validator: validatePassword, trigger: 'blur' }],
+                password: [{ validator: validatePassword, trigger: 'blur' }]
+
+            },
+            phoneLoginRules:{
                 phoneNumber: [{ validator: validatePhone, trigger: 'blur' }],
                 verificationCode: [{ validator: validateCode, trigger: 'blur' }]
             },
@@ -141,21 +157,14 @@ export default {
     },
     mounted: function () {
         window.addEventListener('keydown', this.keydown)
-        this.draw()
     },
     destroyed: function () {
         window.removeEventListener('keydown', this.keydown)
     },
     methods: {
-        // Enter 触发登录方法
         keydown: function (e) {
-            if (e.keyCode === 13) this.login()
-        },
-
-        // 绘制图形验证码
-        draw: function () {
-            // const canvas = document.getElementById("canvas");
-            // this.generateCode = verifyCode(canvas);
+            // enter
+            if (e.keyCode === 13) this.handleLogin()
         },
 
         getCode: function () {
@@ -175,9 +184,14 @@ export default {
             }, 1000)
         },
 
-        // 登录
-        login: function () {
-            this.puzzlePanelVisible = true
+        // login
+        handleLogin: function () {
+            this.$refs.loginForm.validate(valid => {
+                if (!valid) return false
+                user.login().then((res)=>{
+                  this.puzzlePanelVisible = true
+                })
+            })
         },
 
         getValue: function (value) {
@@ -217,6 +231,12 @@ export default {
             padding: 0 0.5rem;
             background-color: #ffffff;
             border: none;
+          }
+
+          & /deep/ .el-input-group__append {
+            svg {
+              cursor: pointer;
+            }
           }
 
           & /deep/ .el-input__inner {
