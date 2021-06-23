@@ -36,15 +36,17 @@
 
       <el-tab-pane :label="$t('login.phoneLogin')" name="second">
         <div class="tab-item">
-          <el-input
-            type="text"
-            v-model="loginForm.phoneNumber"
-            :placeholder="$t('login.phoneNumber')"
-          >
-            <template slot="prepend">
-              <svg-icon iconClass="mobile" :size="1"></svg-icon>
-            </template>
-          </el-input>
+          <el-form-item prop="phoneNumber">
+            <el-input
+              type="text"
+              v-model="loginForm.phoneNumber"
+              :placeholder="$t('login.phoneNumber')"
+            >
+              <template slot="prepend">
+                <svg-icon iconClass="mobile" :size="1"></svg-icon>
+              </template>
+            </el-input>
+          </el-form-item>
         </div>
 
         <div class="tab-item">
@@ -81,14 +83,18 @@
     </div>
 
     <sign-in-with></sign-in-with>
+
+    <puzzle-panel v-if="puzzlePanelVisible" :puzzlePanelVisible="puzzlePanelVisible" v-on:invisible="getValue"></puzzle-panel>
   </el-form>
 </template>
 
 <script>
+import PuzzlePanel from './PuzzlePanel.vue'
 import SignInWith from './SignInWith.vue'
 
 export default {
     components: {
+        PuzzlePanel,
         SignInWith
     },
     data () {
@@ -104,6 +110,7 @@ export default {
 
         const validatePhone = (rule, value, callback) => {
             if (value === '') callback(new Error('请输入手机号!'))
+            else if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) callback(new Error('手机号不合法!'))
             else callback()
         }
 
@@ -128,7 +135,8 @@ export default {
                 verificationCode: [{ validator: validateCode, trigger: 'blur' }]
             },
             hidden: true,
-            getCodeDisabled: false
+            getCodeDisabled: false,
+            puzzlePanelVisible: false
         }
     },
     mounted: function () {
@@ -139,7 +147,7 @@ export default {
         window.removeEventListener('keydown', this.keydown)
     },
     methods: {
-    // Enter 触发登录方法
+        // Enter 触发登录方法
         keydown: function (e) {
             if (e.keyCode === 13) this.login()
         },
@@ -168,7 +176,13 @@ export default {
         },
 
         // 登录
-        login: function () {}
+        login: function () {
+            this.puzzlePanelVisible = true
+        },
+
+        getValue: function (value) {
+            this.puzzlePanelVisible = value
+        }
     }
 }
 </script>
@@ -177,6 +191,7 @@ export default {
 @import "@/styles/_variables.scss";
 
 .el-form {
+  z-index: -1;
   width: 20rem;
   margin: 0 auto;
   text-align: left;
@@ -188,27 +203,30 @@ export default {
 
     .tab-item {
       display: flex;
-      flex-wrap:wrap;
+      align-items: flex-start;
 
-      .el-input {
-        margin: 0.5rem 0;
-        border: 1px solid #d9d9d9;
-        flex-grow: 1;
+      .el-form-item {
+        flex-basis: 99%;
 
-        & /deep/ .el-input-group__prepend,
-        & /deep/ .el-input-group__append {
-          padding: 0 0.5rem;
-          background-color: #ffffff;
-          border: none;
-        }
+        .el-input {
+          flex-grow: 1;
+          border: 1px solid #d9d9d9;
 
-        & /deep/ .el-input__inner {
-          border: none;
+          & /deep/ .el-input-group__prepend,
+          & /deep/ .el-input-group__append {
+            padding: 0 0.5rem;
+            background-color: #ffffff;
+            border: none;
+          }
+
+          & /deep/ .el-input__inner {
+            border: none;
+          }
         }
       }
 
       button {
-        margin: 0.5rem 0 0.5rem 1rem;
+        margin-left: 1rem;
       }
     }
   }

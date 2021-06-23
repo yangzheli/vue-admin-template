@@ -44,6 +44,8 @@ export default {
 
 <style lang="scss" scope>
 .login-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   background-image: url("@/assets/login-bg.svg");
@@ -62,13 +64,8 @@ export default {
   }
 
   .login-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50em;
-    height: 25em;
-    padding: 5em;
-    transform: translate(-50%, -50%);
+    flex: 1;
+    margin: 2rem 0;
 
     .login-header {
       font-size: 2rem;
@@ -82,11 +79,9 @@ export default {
   }
 
   .login-footer {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
+    margin: 2rem 0;
     color: rgba(0, 0, 0, 0.45);
-    transform: translate(-50%, -50%);
+    text-align: center;
     letter-spacing: 0.1rem;
   }
 }
