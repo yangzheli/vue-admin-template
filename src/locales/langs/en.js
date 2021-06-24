@@ -3,7 +3,7 @@ const EN = {
         accountLogin: 'Account Login',
         phoneLogin: 'Phone Login',
         username: 'username: admin/user',
-        password: 'password: vue design',
+        password: 'password: vue.design',
         phoneNumber: 'Phone Number',
         verificationCode: 'Verification Code',
         getCode: 'Get Code',

@@ -17,12 +17,12 @@ const body = document.body
 export default {
     computed: {
         darkStyle: {
-            get: function () {
+            get: function() {
                 const value = this.$store.state.settings.darkStyle
                 body.setAttribute('theme', value ? 'dark' : 'light')
                 return value
             },
-            set: function (value) {
+            set: function(value) {
                 this.$store.dispatch('settings/changeSetting', {
                     key: 'darkStyle',
                     value: value

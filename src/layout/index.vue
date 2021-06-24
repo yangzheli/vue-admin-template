@@ -30,7 +30,7 @@ export default {
     mixins: [ResizeMixin],
     computed: {
     // ...mapGetters(["permission_routes"])
-        classObj () {
+        classObj() {
             return {
                 hideSidebar: !this.sidebar.opened,
                 openSidebar: this.sidebar.opened,
@@ -38,15 +38,15 @@ export default {
                 mobile: this.device === 'mobile'
             }
         },
-        sidebar () {
+        sidebar() {
             return this.$store.state.app.sidebar
         },
-        device () {
+        device() {
             return this.$store.state.app.device
         }
     },
     methods: {
-        handleClickOutside: function () {
+        handleClickOutside: function() {
             this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
         }
     }

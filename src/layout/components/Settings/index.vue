@@ -17,23 +17,23 @@ export default {
     components: {
         Items
     },
-    data: function () {
+    data: function() {
         return {
             open: false
         }
     },
     watch: {
-        open: function (value) {
+        open: function(value) {
             const body = document.body
             if (value) body.setAttribute('class', 'openSetting')
             else body.removeAttribute('class', 'openSetting')
         }
     },
-    mounted: function () {
+    mounted: function() {
         this.insertToBody()
     },
     methods: {
-        insertToBody: function () {
+        insertToBody: function() {
             const ele = this.$refs.setting
             const body = document.body
             body.insertBefore(ele, body.firstChild)

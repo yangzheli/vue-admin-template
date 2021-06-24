@@ -104,7 +104,7 @@ const createRouter = () => new VueRouter({
 
 const router = createRouter()
 
-export const resetRouter = function () {
+export const resetRouter = function() {
     const newRouter = createRouter()
     router.matcher = newRouter.matcher
 }

@@ -35,22 +35,22 @@ export default {
     props: {
         puzzlePanelVisible: Boolean
     },
-    data: function () {
+    data: function() {
         return {
             visible: this.puzzlePanelVisible
         }
     },
-    mounted: function () {
+    mounted: function() {
         this.insertToBody()
     },
     methods: {
-        insertToBody: function () {
+        insertToBody: function() {
             const ele = this.$refs.puzzle
             const body = document.body
             body.appendChild(ele)
         },
 
-        sliderMove: function (e) {
+        sliderMove: function(e) {
             const contentSlider = this.$refs.contentSlider
             const controlSlider = this.$refs.controlSlider
             const puzzleBg = this.$refs.puzzleBg
@@ -90,7 +90,7 @@ export default {
             document.addEventListener('mouseup', mouseUp)
         },
 
-        setValue: function () {
+        setValue: function() {
             this.visible = false
             this.$emit('invisible', false)
         }

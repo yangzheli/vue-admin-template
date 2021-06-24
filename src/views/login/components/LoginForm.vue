@@ -30,7 +30,7 @@
                 <svg-icon
                   :iconClass="hidden ? 'hidden' : 'visible'"
                   :size="1"
-                  @click="hidden = !hidden"
+                  @click.native="hidden = !hidden"
                 ></svg-icon>
               </template>
             </el-input>
@@ -66,7 +66,7 @@
           </el-form-item>
 
           <el-button
-            :class="{ disabled: getCodeDisabled }"
+            :class="{ 'disabled': getCodeDisabled }"
             type="primary"
             @click="getCode"
             :disabled="getCodeDisabled"
@@ -102,14 +102,13 @@
 <script>
 import PuzzlePanel from './PuzzlePanel.vue'
 import SignInWith from './SignInWith.vue'
-import { user } from '@/api/api.js'
 
 export default {
     components: {
         PuzzlePanel,
         SignInWith
     },
-    data: function () {
+    data: function() {
         const validateUsername = (rule, value, callback) => {
             if (value === '') callback(new Error('请输入用户名!'))
             else callback()
@@ -186,9 +185,19 @@ export default {
 
         // login
         handleLogin: function () {
+            let loginForm = this.loginForm
+            let params = this.activeName === 'first' ? {
+              loginType: 0,
+              username: loginForm.username,
+              password: loginForm.password
+            } : { 
+              loginType: 1,
+              phoneNumber: loginForm.phoneNumber,
+              verificationCode: loginForm.verificationCode
+            }
             this.$refs.loginForm.validate(valid => {
                 if (!valid) return false
-                user.login().then((res)=>{
+                this.$api.user.login(params).then((res)=>{
                   this.puzzlePanelVisible = true
                 })
             })

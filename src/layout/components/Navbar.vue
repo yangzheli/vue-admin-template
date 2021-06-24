@@ -19,12 +19,12 @@ export default {
     },
     computed: {
         ...mapGetters(['sidebar']),
-        toggle () {
+        toggle() {
             return this.sidebar.opened ? 'toggle-left' : 'toggle-right'
         }
     },
     methods: {
-        toggleClick: function () {
+        toggleClick: function() {
             this.$store.dispatch('app/toggleSideBar')
         }
     }

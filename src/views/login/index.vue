@@ -36,7 +36,7 @@ export default {
         LoginForm
     },
     methods: {
-        clickDropdown: function (lang) {
+        clickDropdown: function(lang) {
             localStorage.lang = lang
             this.$i18n.locale = lang
         }

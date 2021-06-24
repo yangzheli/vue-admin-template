@@ -3,7 +3,7 @@ const CN = {
         accountLogin: '账号密码登录',
         phoneLogin: '手机号登录',
         username: '用户名: admin/user',
-        password: '密码: vue design',
+        password: '密码: vue.design',
         phoneNumber: '请输入手机号',
         verificationCode: '请输入验证码',
         getCode: '获取验证码',
