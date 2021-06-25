@@ -198,6 +198,7 @@ export default {
             this.$refs.loginForm.validate(valid => {
                 if (!valid) return false
                 this.$api.user.login(params).then((res)=>{
+                  console.log(res)
                   this.puzzlePanelVisible = true
                 })
             })

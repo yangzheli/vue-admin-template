@@ -20,7 +20,8 @@ module.exports = {
   },
   devServer: {
     contentBase: './',
-    port: 8888
+    port: 5050,
+    before: require('./mock/index.js')  // mock server
   },
   module: {
     rules: [{

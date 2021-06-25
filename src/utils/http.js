@@ -10,9 +10,9 @@ const env = process.env.NODE_ENV
 
 // env
 if (env === 'development') {
-    axios.defaults.baseURL = 'http://localhost:8080'
+    axios.defaults.baseURL = 'http://localhost:5050'
 } else if (env === 'production') {
-    axios.defaults.baseURL = 'http://localhost:8080'
+    axios.defaults.baseURL = 'http://localhost:5050'
 }
 
 // instance
@@ -22,7 +22,7 @@ const instance = axios.create({
 })
 
 // request interceptor
-axios.interceptors.request.use(
+instance.interceptors.request.use(
     config => {
         const token = store.state.token
         token && (config.headers.Authorization = token)
@@ -33,7 +33,7 @@ axios.interceptors.request.use(
     })
 
 // response interceptor
-axios.interceptors.response.use(
+instance.interceptors.response.use(
     response => {
         if (response.status === 200) {
             return Promise.resolve(response)

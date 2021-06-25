@@ -48,10 +48,23 @@ const validAccount = function(username, password) {
     return users.indexOf(username.trim()) >= 0 && password === 'vue.design'
 }
 
-export default {
-    'post|/vue-design/user/login': (options) => {
-        const { loginType = 0, username, password, phoneNumber, verificationCode } = JSON.parse(options.body)
-        if (!loginType)  return accoutlogin(username, password) 
-        else return phoneLogin(phoneNumber, verificationCode)
+module.exports = [
+    {
+        url: '/vue-design/user/login',
+        type: 'post',
+        response: (req, res) => {
+            const { loginType = 0, username, password, phoneNumber, verificationCode } = req.body
+            if (!loginType)  return accoutlogin(username, password) 
+            else return phoneLogin(phoneNumber, verificationCode)
+        }
+    },
+    {
+        url: '/vue-design/user/logout',
+        type: 'post',
+        response: (req, res) => {
+            const { loginType = 0, username, password, phoneNumber, verificationCode } = req.body
+            if (!loginType)  return accoutlogin(username, password) 
+            else return phoneLogin(phoneNumber, verificationCode)
+        }
     }
-}
+]

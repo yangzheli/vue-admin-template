@@ -1,22 +1,58 @@
-// https://www.jianshu.com/p/c5568910e946
-import Mock from 'mockjs'
+const Mock = require('mockjs')
+const bodyParser = require('body-parser')
+const path = require('path')
+const chokidar = require('chokidar')
+const chalk = require('chalk')
 
-// timeout
-Mock.setup({
-    timeout: '200-600'
-})
+const user = require('./modules/user.js')
 
-let api = []
+const mocks = [
+    ...user
+]
 
-const files = require.context('./modules', true, /\.js$/)
+const modules = path.join(__dirname, '/modules')
 
-files.keys().forEach(key => {
-    api = api.concat(files(key).default)
-})
-
-api.forEach(item => {
-    for (const [path, target] of Object.entries(item)) {
-        const protocal = path.split('|')
-        Mock.mock(new RegExp(protocal[1]), protocal[0] || 'get', target)
+// register routes
+const registerRoutes = function (app) {
+    const routes = mocks.map(route => {
+        const response = route.response
+        return {
+            url: new RegExp(route.url),
+            type: route.type || 'get',
+            response: (req, res) => res.json(Mock.mock(response instanceof Function ? response(req, res) : response))
+        }
+    })
+    for (const route of routes) {
+        app[route.type](route.url, route.response)
     }
-})
+}
+
+// clear routes cache
+const unregisterRoutes = function () {
+    Object.keys(require.cache).forEach(i => {
+        if (i.includes(modules)) delete require.cache[require.resolve(i)]
+    })
+}
+
+// mock server
+module.exports = (app, server, compiler) => {
+    // parse app.body
+    // https://expressjs.com/en/4x/api.html#req.body
+    app.use(bodyParser.json()) // for parsing application/json
+    app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+    registerRoutes(app)
+
+    chokidar.watch(modules).on('all', (event, path) => {
+        if (event === 'change' || event === 'add') {
+            try {
+                unregisterRoutes()
+
+                registerRoutes(app)
+                console.log(chalk.magentaBright(`\n > Mock Server hot reload success! changed  ${path}`))
+            } catch (error) {
+                console.log(chalk.redBright(error))
+            }
+        }
+    })
+}
