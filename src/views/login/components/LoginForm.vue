@@ -197,10 +197,15 @@ export default {
             }
             this.$refs.loginForm.validate(valid => {
                 if (!valid) return false
-                this.$api.user.login(params).then((res)=>{
-                  console.log(res)
-                  this.puzzlePanelVisible = true
-                })
+                // this.puzzlePanelVisible = true
+                this.$store.dispatch('user/login', params)
+                // this.$api.user.login(params).then((res) => {
+                //   console.log(res)
+                //   this.$api.role.getRoutes().then((res) => {
+                //     console.log(res)
+                //     this.$store.dispatch('permission/generateRoutes', res)
+                //   })
+                // })
             })
         },
 

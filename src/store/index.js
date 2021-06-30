@@ -3,7 +3,9 @@ import Vue from 'vue'
 import getters from './getters'
 
 import app from './modules/app.js'
+import permission from './modules/permission.js'
 import settings from './modules/settings.js'
+import user from './modules/user.js'
 
 Vue.use(Vuex)
 
@@ -21,7 +23,9 @@ const store = new Vuex.Store({
     // modules,
     modules: {
         app,
-        settings
+        permission,
+        settings,
+        user
     },
     getters
 })

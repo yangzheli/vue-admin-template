@@ -1,10 +1,7 @@
 // https://juejin.cn/post/6844903652881072141
 import axios from 'axios'
 import store from '../store/index.js'
-// import {
-//     Message,
-//     MessageBox
-// } from 'element-ui'
+import { Message } from 'element-ui'
 
 const env = process.env.NODE_ENV
 
@@ -35,11 +32,15 @@ instance.interceptors.request.use(
 // response interceptor
 instance.interceptors.response.use(
     response => {
-        if (response.status === 200) {
-            return Promise.resolve(response)
-        } else {
-            return Promise.reject(response)
-        }
+        const data = response.data
+        if (data.code !== 200) {
+            Message({
+                type: 'error',
+                message: data.msg || 'Error',
+                duration: 1000
+            })
+            return Promise.reject(new Error(data.msg || 'Error'))
+        } else return data
     },
     error => {
         return Promise.error(error)

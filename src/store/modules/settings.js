@@ -9,19 +9,14 @@ const state = {
 }
 
 const mutations = {
-    CHANGE_SETTING: (state, {
-        key,
-        value
-    }) => {
+    CHANGE_SETTING: (state, { key, value }) => {
         // eslint-disable-next-line
         if (state.hasOwnProperty(key)) state[key] = value
     }
 }
 
 const actions = {
-    changeSetting: function({
-        commit
-    }, data) {
+    changeSetting: function({ commit }, data) {
         commit('CHANGE_SETTING', data)
     }
 }

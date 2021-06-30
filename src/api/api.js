@@ -7,9 +7,11 @@ const env = process.env.NODE_ENV
 
 const devBaseURL = {
     user: "/vue-design/user",
+    role: "/vue-design/role",
 }
 const prodBaseURL = {
     user: '/vue-design/user',
+    role: "/vue-design/role",
 }
 const baseURL = env === 'production' ? prodBaseURL : devBaseURL
 
@@ -24,7 +26,15 @@ const user = {
     }
 }
 
+const role = {
+    // role permission
+    getRoutes(params){
+        return axios.post(`${baseURL.role}/getRoutes`, params)
+    }
+}
+
 export default {
     baseURL,
-    user
+    user,
+    role
 }

@@ -26,21 +26,13 @@ const mutations = {
 }
 
 const actions = {
-    toggleSideBar: function({
-        commit
-    }) {
+    toggleSideBar: function({ commit }) {
         commit('TOGGLE_SIDEBAR')
     },
-    closeSideBar: function({
-        commit
-    }, {
-        withoutAnimation
-    }) {
+    closeSideBar: function({ commit }, { withoutAnimation }) {
         commit('CLOSE_SIDEBAR', withoutAnimation)
     },
-    toggleDevice: function({
-        commit
-    }, device) {
+    toggleDevice: function({ commit }, device) {
         commit('TOGGLE_DEVICE', device)
     }
 }
